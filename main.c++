@@ -34,15 +34,17 @@ void getCPUUsage() {
 } 
 
 doubnle getMemoryUsage() {
-    std::istream meInfo("/proc/meminfo");
+    std::ifstream meInfo("/proc/meminfo");//abrimo el archivo en modo lectura
     std::string line;
     long long totalMem = 0, freeMem = 0;
 
-    while (std::getLine(memInfo, line)) {
-        std::istringstream ss(line);
+    while (std::getLine(memInfo, line)) {//lee cada linea del archivo
+        std::istringstream ss(line);// Convierte la línea en un flujo que permite dividirla en palabras clave y valores numéricos.
         std::string key;
         long long value;
         ss >> key >> value;
+        //Extrae la primera palabra (key) y el 
+        //primer valor numérico (value) de la línea.
 
         if(key == "MemTotal:") totalMem = value;
         if(key == "MemFree") freeMem = value;
